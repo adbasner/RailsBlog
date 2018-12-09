@@ -10,12 +10,22 @@
   </head>
 
   <body>
-    <%= flash[:notice] %>
-    <%= flash[:success] %>
-    <%= flash[:warning] %>
-    <%= @jwt %>
     <a href="/login">Log In</a>
     <a href="/logout" data-method="delete">Log Out</a>
-    <%= yield %>
+
+    <% flash.each do |key, value| %>
+      <% if key ==  'warning' %>
+        <% value.each do |error| %>
+          <p>RED TEXT - <%= error %></p>
+        <% end %>
+      <% elsif key == 'success' %>
+        <p>GREEN TEXT - <%= value %></p>
+      <% end %>
+        <!--       <%= flash[:success] %>
+      <%= flash[:warning] %> -->
+    <% end %>
+    
+    <%= @jwt %>
+        <%= yield %>
   </body>
 </html>

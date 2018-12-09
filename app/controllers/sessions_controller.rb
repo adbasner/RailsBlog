@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
     else
       flash[:warning] = 'wrong password dummy'
       redirect_to '/login'
-      render json: {}
+      # render json: {}
     end
   end
 
