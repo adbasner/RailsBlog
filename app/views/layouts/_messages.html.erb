@@ -1,0 +1,11 @@
+<% flash.each do |key, value| %>
+  <% if key ==  'warning' %>
+    <% value.each do |error| %>
+      <p>RED TEXT - <%= error %></p>
+    <% end %>
+  <% elsif key == 'success' %>
+    <p>GREEN TEXT - <%= value %></p>
+  <% end %>
+<% end %>
+    
+<%= @jwt %>

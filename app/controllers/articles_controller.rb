@@ -10,7 +10,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
-    @article = Article.find(params[:id])
+    set_article
   end
 
   # GET /articles/new
@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1/edit
   def edit
-    @article = Article.find(params[:id])
+    set_article
   end
 
   # POST /articles
@@ -39,10 +39,10 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article = Article.find(params[:id])
-    
+    set_article
+
     if @article.update(article_params)
-      flash[:success] = 'Article was updated successfully'
+      flash[:success] = 'Article was successfully updated.'
       redirect_to article_path(@article)
     else
       flash[:warning] = @article.errors.full_messages
@@ -53,10 +53,13 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
-    @article.destroy
-    respond_to do |format|
-      format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
-      format.json { head :no_content }
+    set_article
+    if @article.destroy
+      flash[:success] = 'Article was successfully deleted.'
+      redirect_to articles_path
+    else
+      flash[:warning] = 'Article could not be deleted.'
+      redirect_to articles_path
     end
   end
 

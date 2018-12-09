@@ -1,31 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>RaiBlog</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>RaiBlog</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+</head>
 
-  <body>
-    <a href="/login">Log In</a>
-    <a href="/logout" data-method="delete">Log Out</a>
+<body>
 
-    <% flash.each do |key, value| %>
-      <% if key ==  'warning' %>
-        <% value.each do |error| %>
-          <p>RED TEXT - <%= error %></p>
-        <% end %>
-      <% elsif key == 'success' %>
-        <p>GREEN TEXT - <%= value %></p>
-      <% end %>
-        <!--       <%= flash[:success] %>
-      <%= flash[:warning] %> -->
-    <% end %>
-    
-    <%= @jwt %>
-        <%= yield %>
-  </body>
+  <%= link_to 'Home', root_path %>
+  <a href="/login">Log In</a>
+  <a href="/logout" data-method="delete">Log Out</a>
+  <%= render 'layouts/messages' %>
+  
+  <%= yield %>
+</body>
 </html>
