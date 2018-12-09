@@ -54,6 +54,7 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1.json
   def destroy
     set_article
+
     if @article.destroy
       flash[:success] = 'Article was successfully deleted.'
       redirect_to articles_path
@@ -64,12 +65,12 @@ class ArticlesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # Drys up code
     def set_article
       @article = Article.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Only allow the white list through.
     def article_params
       params.require(:article).permit(:title, :content)
     end
