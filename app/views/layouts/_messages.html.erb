@@ -1,10 +1,10 @@
 <% flash.each do |key, value| %>
   <% if key ==  'warning' %>
     <% value.each do |error| %>
-      <p>RED TEXT - <%= error %></p>
+      <div class="alert alert-danger" role="alert">RED TEXT - <%= error %></div>
     <% end %>
   <% elsif key == 'success' %>
-    <p>GREEN TEXT - <%= value %></p>
+    <div class="alert alert-success">GREEN TEXT - <%= value %></div>
   <% end %>
 <% end %>
     
