@@ -4,7 +4,14 @@ Rails.application.routes.draw do
   # verb "/urls" => "namespace/controllers#action"
 
   root 'pages#home'
-  # get 'pages/home', to: 'pages#home'
+  # get 'pages/home',\ to: 'pages#home'
   get 'pages/about' => 'pages#about'
 
+
+  # user info
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create'
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  delete '/logout' => 'sessions#destroy'
 end

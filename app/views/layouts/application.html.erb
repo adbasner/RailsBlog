@@ -10,6 +10,12 @@
   </head>
 
   <body>
+    <%= flash[:notice] %>
+    <%= flash[:success] %>
+    <%= flash[:warning] %>
+    <%= @jwt %>
+    <a href="/login">Log In</a>
+    <a href="/logout" data-method="delete">Log Out</a>
     <%= yield %>
   </body>
 </html>
