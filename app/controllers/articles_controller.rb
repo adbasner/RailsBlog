@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, except: [:index, :show]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def index
     @articles = Article.all
@@ -54,13 +56,21 @@ class ArticlesController < ApplicationController
   end
 
   private
-    # Drys up code
-    def set_article
-      @article = Article.find(params[:id])
-    end
 
-    # Only allow the white list through.
-    def article_params
-      params.require(:article).permit(:title, :content)
+  # Drys up code
+  def set_article
+    @article = Article.find(params[:id])
+  end
+
+  # Only allow the white list through.
+  def article_params
+    params.require(:article).permit(:title, :content)
+  end
+
+  def require_same_user
+    if current_user != @article.user
+      flash[:danger] = ['You can not edit these articles fool']
+      redirect_to root_path
     end
+  end
 end
