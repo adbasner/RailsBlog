@@ -4,29 +4,27 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(username: params[:username])
-    if user && user.authenticate(params[:password])
-      jwt = JWT.encode(
-        {
-          user: user.id, # the data to encode
-          exp: 24.hours.from_now.to_i # the expiration time
-        },
-        Rails.application.credentials.fetch(:secret_key_base), # the secret key
-        'HS256' # the encryption algorithm
-      )
-      # render json: {jwt: jwt, email: user.email}, status: :created
+    user = User.find_by(username: sessions_params[:username])
+    if user && user.authenticate(sessions_params[:password])
+      session[:user_id] = user.id
       flash[:success] = ["#{user.username} is logged in!"]
-      redirect_to '/'
+      redirect_to user_path(user)
+      # "/users/#{user.id}"
     else
-      flash[:warning] = ['Wrong user name or password']
+      flash.now[:warning] = ['Wrong user name or password']
       render 'new'
       # render json: {}
     end
   end
 
   def destroy
-    session[:jwt] = nil
+    session[:user_id] = nil
     flash[:warning] = ['logged out']
     redirect_to '/login'
+  end
+
+  private
+  def sessions_params
+    params.require(:session).permit(:username, :password)
   end
 end

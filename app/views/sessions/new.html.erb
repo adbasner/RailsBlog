@@ -1,13 +1,24 @@
 <h1>Login</h1>
+
 <%= render 'shared/flash' %>
 <%= render 'shared/errors', obj: @user %>
 
-<%= form_tag "/login", method: :post do %>
+<%= form_for(:session, url: login_path) do |form| %>
   <div>
-    usename: <input type="text" name="username">
+    <%= form.label :username %>
   </div>
   <div>
-    Password: <input type="password" name="password">
+    <%= form.text_field :username %>
   </div>
-  <input type="submit" value="Log In">
+
+  <div>
+    <%= form.label :password %>
+  </div>
+  <div>
+    <%= form.password_field :password %>
+  </div>
+
+  <div>
+    <%= form.submit "Log In" %>
+  </div>
 <% end %>

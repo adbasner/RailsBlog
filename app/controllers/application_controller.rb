@@ -1,38 +1,21 @@
 class ApplicationController < ActionController::Base
-  before_action :set_headers
+  protect_from_forgery with: :exception
   # before_action :authenticate_user
 
-  def set_headers
-    if session[:jwt]
-      @jwt = session[:jwt]
-      Unirest.default_header('Authorization', "Bearer #{session[:jwt]}")
-    else
-      Unirest.clear_default_headers()
-    end
-  end
+  helper_method :current_user, :logged_in?
 
   def current_user
-    if request.headers['Authorization'].present?
-      token = request.headers['Authorization'].split(' ').last
-      begin
-        decoded_token = JWT.decode(
-          token,
-          Rails.application.credentials.fetch(:secret_key_base),
-          true,
-          { algorithm: 'HS256' }
-        )
-        User.find_by(id: decoded_token[0]["user"])
-      rescue JWT::ExpiredSignature
-        nil
-      end
-    end
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
-  helper_method :current_user
+  def logged_in?
+    !!current_user
+  end
 
-  def authenticate_user
-    unless current_user
-      render json: {}, status: :unauthorized
+  def require_user
+    if !logged_in?
+      flash[:danger] = ['You must be an admin to perform that action']
+      redirect_to root_path
     end
   end
 end

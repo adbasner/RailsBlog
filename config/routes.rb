@@ -11,12 +11,12 @@ Rails.application.routes.draw do
   resources :articles
 
   # Users
-  get '/signup' => 'users#new'
+  get 'signup' => 'users#new'
   # post '/users' => 'users#create'
-  resources :users, except: :new
+  resources :users, except: [:new, :index, :destroy]
 
   # Sessions
-  get '/login' => 'sessions#new'
-  post '/login' => 'sessions#create'
-  delete '/logout' => 'sessions#destroy'
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
 end
