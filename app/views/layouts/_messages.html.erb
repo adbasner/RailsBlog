@@ -1,11 +1,21 @@
-<% flash.each do |key, value| %>
-  <% if key ==  'warning' %>
-    <% value.each do |error| %>
-      <div class="alert alert-danger" role="alert">RED TEXT - <%= error %></div>
+<div class="container pt-3">
+  <% flash.each do |key, value| %>
+    <% if key ==  'warning' %>
+      <% value.each do |error| %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">RED TEXT - <%= error %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% end %>
+    <% elsif key == 'success' %>
+      <div class="alert alert-success alert-dismissible fade show">GREEN TEXT - <%= value %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
     <% end %>
-  <% elsif key == 'success' %>
-    <div class="alert alert-success">GREEN TEXT - <%= value %></div>
   <% end %>
-<% end %>
-    
-<%= @jwt %>
+  <%= @jwt %>
+</div>
+  

@@ -14,7 +14,8 @@ class UsersController < ApplicationController
       flash[:success] = "created acount"
       redirect_to '/'
     else
-      render json: {errors: @user.errors.full_messages}, status: unprocessable_entity
+      flash[:warning] = @user.errors.full_messages
+      redirect_to '/signup'
     end
   end
 end

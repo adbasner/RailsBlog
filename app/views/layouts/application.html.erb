@@ -10,12 +10,9 @@
 </head>
 
 <body>
-
-  <%= link_to 'Home', root_path %>
-  <a href="/login">Log In</a>
-  <a href="/logout" data-method="delete">Log Out</a>
-  <%= render 'layouts/messages' %>
-  
+  <%= @jwt %>
+  <%= render 'layouts/navigation' %>
   <%= yield %>
+  
 </body>
 </html>
