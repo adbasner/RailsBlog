@@ -19,6 +19,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
+    @article.user_id = 15
 
     if @article.save
       flash[:success] = ['You made a new post!']
