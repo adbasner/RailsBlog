@@ -1,11 +1,3 @@
 <h1>SignUp</h1>
-<%= render 'shared/flash' %>
-<%= render 'shared/errors', obj: @user %>
 
-<%= form_tag '/users', method: :post do %>
-  
-  username: <input type="text" name="username">
-  password: <input type="password" name="password">
-  confirm password: <input type="password" name="password_confirmation">
-  <input type="submit" name="Submit">
-<% end %>
+<%= render 'form' %>

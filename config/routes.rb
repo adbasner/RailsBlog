@@ -10,9 +10,12 @@ Rails.application.routes.draw do
   # artciles rest routes
   resources :articles
 
-  # user/login info
+  # Users
   get '/signup' => 'users#new'
-  post '/users' => 'users#create'
+  # post '/users' => 'users#create'
+  resources :users, except: :new
+
+  # Sessions
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
