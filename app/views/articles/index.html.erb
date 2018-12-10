@@ -18,6 +18,7 @@
         <td><%= link_to 'View', article_path(article) %></td>
         <td><%= link_to 'Edit', edit_article_path(article) %></td>
         <td><%= link_to 'Delete', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>Created On <%= article.created_at.strftime("%b %d, %Y") %></td>
       </tr>
     <% end %>
   </tbody>
