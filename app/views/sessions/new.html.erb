@@ -1,5 +1,7 @@
 <h1>Login</h1>
-<%= render 'layouts/messages' %>
+<%= render 'shared/flash' %>
+<%= render 'shared/errors', obj: @user %>
+
 <%= form_tag "/login", method: :post do %>
   <div>
     usename: <input type="text" name="username">

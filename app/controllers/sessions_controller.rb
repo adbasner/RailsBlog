@@ -15,21 +15,18 @@ class SessionsController < ApplicationController
         'HS256' # the encryption algorithm
       )
       # render json: {jwt: jwt, email: user.email}, status: :created
-      flash[:success] = "logged in #{jwt}"
-      @jwt = jwt
+      flash[:success] = ["#{user.username} is logged in!"]
       redirect_to '/'
     else
       flash[:warning] = ['Wrong user name or password']
-      redirect_to '/login'
+      render 'new'
       # render json: {}
     end
   end
 
   def destroy
     session[:jwt] = nil
-    flash[:success] = 'logged out'
+    flash[:warning] = ['logged out']
     redirect_to '/login'
   end
-
-
 end

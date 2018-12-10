@@ -1,5 +1,5 @@
-<h2>New Article</h2>
-<%= render 'layouts/messages' %>
+<%= render 'shared/flash' %>
+<%= render 'shared/errors', obj: @article %>
 <%= render 'form', article: @article %>
 
 <%= link_to 'Back', articles_path %>

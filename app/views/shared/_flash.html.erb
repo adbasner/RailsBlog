@@ -1,0 +1,14 @@
+<div class="my-3">
+  <% flash.each do |name, msg| %>
+    <div class='alert alert-<%= "#{name}" %> alert-dismissible p-2'>
+      <% msg.each do |text| %>
+        <p class="m-0 p-2"><%= text %></p>
+      <% end %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
+</div>
+
+  

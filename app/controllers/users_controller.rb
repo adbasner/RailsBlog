@@ -11,11 +11,10 @@ class UsersController < ApplicationController
     )
 
     if @user.save
-      flash[:success] = "created acount"
+      flash[:success] = ["Account created"]
       redirect_to '/'
     else
-      flash[:warning] = @user.errors.full_messages
-      redirect_to '/signup'
+      render 'new'
     end
   end
 end
